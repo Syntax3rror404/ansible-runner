@@ -9,9 +9,9 @@ image-builder:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build -t mzapf/ansible-runnerv1 .
+    - docker build -t mzapf/pub-image-lib:ansible-runnerv1 .
   after_script:
-    - docker image save -o docker-image-builder.tar mzapf/ansible-runnerv1
+    - docker image save -o docker-image-builder.tar mzapf/pub-image-lib:ansible-runnerv1
     - docker push mzapf/pub-image-lib:ansible-runnerv1
     - docker logout
   artifacts:
