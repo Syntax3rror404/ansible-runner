@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM ubuntu:focal
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 
 RUN echo "===> Installing required toolcain "  && \
