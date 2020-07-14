@@ -20,6 +20,6 @@ RUN echo "===> Installing required toolcain "  && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
 ADD ./entrypoint.sh /tmp/entrypoint.sh
-RUN chmod 777 /tmp/docker-entrypoint.sh
+RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 CMD ["/usr/sbin/sshd","-D"]
