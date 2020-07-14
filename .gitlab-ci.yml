@@ -2,8 +2,10 @@ image-builder:
   tags:
     - docker
     
-  image: docker
+  image: docker:dind
   stage: build
+  services:
+    - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
