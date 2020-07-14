@@ -2,7 +2,6 @@ image-builder:
   tags:
     - docker
     
-  image: docker:dind
   stage: build
   services:
     - docker:dind
