@@ -4,7 +4,7 @@ MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 RUN echo "===> Installing required toolcain "  && \
     apt-get update -y                         && \
     DEBIAN_FRONTEND=noninteractive               \
-    apt-get install -y sudo python python-yaml openssh-client \
+    apt-get install -y sudo python python-yaml openssh-client openssh-server\
                         curl gcc python-pip python-dev libffi-dev libssl-dev openssh-client && \
     apt-get -y --purge remove python-cffi          && \
     pip install --upgrade pycrypto cffi pywinrm    && \
