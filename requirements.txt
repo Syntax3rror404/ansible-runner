@@ -1,7 +1,7 @@
+#pip3
 ansible==2.9.10
 pyvmomi
 netaddr
-# Required for running testinfra verification
 paramiko
 testinfra
 pytest-xdist
