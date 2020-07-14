@@ -1,0 +1,11 @@
+pyvmomi
+netaddr
+# Required for running testinfra verification
+paramiko
+testinfra
+pytest-xdist
+passlib
+gitlab
+python-gitlab
+jmespath
+ansible-tower-cli
