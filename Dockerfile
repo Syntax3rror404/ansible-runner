@@ -7,9 +7,9 @@ RUN echo "===> Installing required toolcain "  && \
     apt-get install -y sudo python3 python3-yaml openssh-client openssh-server\
                         curl gcc python3-pip python3-dev libffi-dev libssl-dev openssh-client && \
     apt-get -y --purge remove python-cffi          && \
-    pip install --upgrade pycrypto cffi pywinrm    && \
+    pip3 install --upgrade pycrypto cffi pywinrm    && \
     echo "===> Installing Ansible over pip "   && \
-    pip install ansible                 && \
+    pip3 install ansible                 && \
     echo "===> Removing unused resources "                  && \
     apt-get -f -y --auto-remove remove \
                  gcc python-pip python-dev libffi-dev libssl-dev  && \
