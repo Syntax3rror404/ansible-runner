@@ -13,7 +13,12 @@ RUN echo "===> Installing required toolcain "  && \
     echo "===> Removing unused resources "                  && \
     apt-get -f -y --auto-remove remove \
                  gcc python-pip python-dev libffi-dev libssl-dev  && \
-    echo "===> make sure SSH host keys exists "   && \
-    dpkg-reconfigure openssh-server             && \
     apt-get clean                                                 && \
-    rm -rf /var/lib/apt/lists/*  /tmp/*                           
+    rm -rf /var/lib/apt/lists/*  /tmp/*                           && \
+    echo "==> Adding hosts for convenience..."  && \
+    mkdir -p /etc/ansible /ansible && \
+    echo "[local]" >> /etc/ansible/hosts && \
+    echo "localhost" >> /etc/ansible/hosts
+ADD ./entrypoint.sh /tmp/entrypoint.sh
+ENTRYPOINT ["/tmp/entrypoint.sh"]
+CMD ["/usr/sbin/sshd","-D"]
