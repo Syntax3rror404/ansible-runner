@@ -9,7 +9,8 @@ RUN echo "===> Installing required toolcain "  && \
                         curl gcc python3-pip python3-dev libffi-dev libssl-dev openssh-client && \
     apt-get -y --purge remove python-cffi          && \
     pip3 install --upgrade pycrypto cffi pywinrm    && \
-    echo "==> Installing pip requirements file..."  && \
+    \
+    echo "===> Installing pip requirements file..."  && \
     pip3 install -r /tmp/requirements.txt && \
     \
     echo "===> Removing unused resources "                  && \
@@ -17,7 +18,8 @@ RUN echo "===> Installing required toolcain "  && \
                  gcc python-pip python-dev libffi-dev libssl-dev  && \
     apt-get clean                                                 && \
     rm -rf /var/lib/apt/lists/*  /tmp/*                           && \
-    echo "==> Adding hosts for convenience..."  && \
+    \
+    echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
