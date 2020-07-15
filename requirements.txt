@@ -10,3 +10,4 @@ gitlab
 python-gitlab
 jmespath
 ansible-tower-cli
+packaging
