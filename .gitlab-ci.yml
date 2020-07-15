@@ -10,11 +10,7 @@ image-builder:
   script:
     - docker build -t mzapf/pub-image-lib:ansible-runnerv1 .
   after_script:
-    - docker image save -o docker-image-builder.tar mzapf/pub-image-lib:ansible-runnerv1
     - docker push mzapf/pub-image-lib:ansible-runnerv1
     - docker logout
-  artifacts:
-   paths:
-    - docker-image-builder.tar
   only:
     - master
