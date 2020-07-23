@@ -12,4 +12,3 @@ jmespath
 ansible-tower-cli
 packaging
 msrestazure
-ansible[azure]
