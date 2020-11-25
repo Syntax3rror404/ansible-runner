@@ -2,7 +2,13 @@ FROM python:3-alpine
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 
 ADD ./requirements.txt /tmp/requirements.txt
-RUN echo "===> Installing ffi-dev..."  && \
+RUN echo "===> Installing libressl-dev..."  && \
+    apk add libressl-dev && \
+    echo "===> Installing musl-dev..."  && \
+    apk add musl-dev && \
+    echo "===> Installing openssl-dev..."  && \
+    apk add openssl-dev && \
+    echo "===> Installing ffi-dev..."  && \
     apk add libffi-dev && \
     echo "===> Installing GCC..."  && \
     apk add build-base && \
@@ -12,6 +18,7 @@ RUN echo "===> Installing ffi-dev..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
+
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
