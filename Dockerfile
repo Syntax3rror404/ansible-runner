@@ -2,7 +2,9 @@ FROM python:3-alpine
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 
 ADD ./requirements.txt /tmp/requirements.txt
-RUN echo "===> Installing GCC..."  && \
+RUN echo "===> Installing ffi-dev..."  && \
+    apk add libffi-dev && \
+    echo "===> Installing GCC..."  && \
     apk add build-base && \
     echo "===> Installing pip requirements file..."  && \
     pip3 install -r /tmp/requirements.txt && \
