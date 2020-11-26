@@ -2,7 +2,11 @@ FROM python:3-alpine
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 
 ADD ./requirements.txt /tmp/requirements.txt
-RUN echo "===> Installing ssh-client..."  && \
+ADD ./entrypoint.sh /tmp/entrypoint.sh
+
+RUN echo "===> Installing GIT..."  && \
+    apk add git && \
+    echo "===> Installing ssh-client..."  && \
     apk add openssh-client && \
     apk add openssh-keygen && \
     echo "===> Installing Terraform..."  && \
@@ -32,7 +36,6 @@ RUN echo "===> Installing ssh-client..."  && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
 
-ADD ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 CMD ["/usr/sbin/sshd","-D"]
