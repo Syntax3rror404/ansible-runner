@@ -22,6 +22,10 @@ RUN echo "===> Installing ssh-client..."  && \
     apk add build-base && \
     echo "===> Installing pip requirements file..."  && \
     pip3 install -r /tmp/requirements.txt && \
+    echo "===> Remove unneeded resources after build..."  && \
+    apk del build-base && \
+    echo "===> Remove unneeded sources after build..."  && \
+    rm -rf /src
     echo "===> Clean alpine apk cache..."  && \
     apk cache clean && \
     echo "===> Adding hosts for convenience..."  && \
