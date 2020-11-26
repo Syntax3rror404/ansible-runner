@@ -11,6 +11,8 @@ before_script:
 
 build:
   stage: build
+  tags:
+    - docker
   script:
     - docker build -t mzapf/ansible-runner:stable .
   only:
@@ -18,6 +20,8 @@ build:
 
 push:
   stage: push
+  tags:
+    - docker
   script:
     - docker push mzapf/ansible-runner:stable
   after_script:
