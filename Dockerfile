@@ -22,6 +22,8 @@ RUN echo "===> Installing ssh-client..."  && \
     apk add build-base && \
     echo "===> Installing pip requirements file..."  && \
     pip3 install -r /tmp/requirements.txt && \
+    echo "===> Clean alpine apk cache..."  && \
+    apk cache clean && \
     echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
