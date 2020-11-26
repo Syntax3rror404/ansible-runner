@@ -1,8 +1,6 @@
 services:
 - docker:dind
 
-tags:
-  - docker
 
 stages:
 - build
