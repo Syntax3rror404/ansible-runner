@@ -1,14 +1,7 @@
-stages:
-  – build
-  – push
-
-
-
-
-
-build:
+image-builder:
   tags:
     - docker
+
   stage: build
   services:
     - docker:dind
@@ -16,18 +9,6 @@ build:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
   script:
     - docker build -t mzapf/ansible-runner:stable .
-  only:
-    - master
-
-push:
-  tags:
-    - docker
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-  script:
     - docker push mzapf/ansible-runner:stable
   after_script:
     - docker logout
