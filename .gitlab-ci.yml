@@ -15,6 +15,8 @@ build:
     - docker
   script:
     - docker build -t mzapf/ansible-runner:stable .
+  artifacts:
+    untracked: true
   only:
     - master
 
@@ -26,5 +28,7 @@ push:
     - docker push mzapf/ansible-runner:stable
   after_script:
     - docker logout
+  dependencies: 
+    - build
   only:
     - master
