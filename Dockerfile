@@ -25,7 +25,7 @@ RUN echo "===> Installing ssh-client..."  && \
     echo "===> Remove unneeded resources after build..."  && \
     apk del build-base && \
     echo "===> Remove unneeded sources after build..."  && \
-    rm -rf /src
+    rm -rf /src && \
     echo "===> Clean alpine apk cache..."  && \
     apk cache clean && \
     echo "===> Adding hosts for convenience..."  && \
