@@ -4,6 +4,7 @@ MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 ADD ./requirements.txt /tmp/requirements.txt
 RUN echo "===> Installing ssh-client..."  && \
     apk add openssh-client && \
+    apk add openssh-keygen && \
     echo "===> Installing Terraform..."  && \
     wget https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip && \
     unzip terraform_0.13.5_linux_amd64.zip && \
