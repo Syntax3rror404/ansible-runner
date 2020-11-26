@@ -25,9 +25,7 @@ RUN echo "===> Installing ssh-client..."  && \
     echo "===> Remove unneeded resources after build..."  && \
     apk del build-base && \
     echo "===> Remove unneeded sources after build..."  && \
-    rm -rf /src && \
-    echo "===> Clean alpine apk cache..."  && \
-    apk cache clean && \
+    rm -rf /src && echo "OK" && \
     echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
