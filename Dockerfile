@@ -15,8 +15,6 @@ RUN echo "===> Installing GIT..."  && \
     rm -rf terraform_0.13.5_linux_amd64.zip && \
     mv terraform /usr/local/bin/terraform && \
     chmod +x /usr/local/bin/terraform && \
-    echo "===> Installing libressl-dev..."  && \
-    apk add libressl-dev && \
     echo "===> Installing musl-dev..."  && \
     apk add musl-dev && \
     echo "===> Installing openssl-dev..."  && \
