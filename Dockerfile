@@ -2,7 +2,9 @@ FROM python:3-alpine
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 
 ADD ./requirements.txt /tmp/requirements.txt
-RUN echo "===> Installing Terraform..."  && \
+RUN echo "===> Installing ssh-client..."  && \
+    apk add openssh-client && \
+    echo "===> Installing Terraform..."  && \
     wget https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip && \
     unzip terraform_0.13.5_linux_amd64.zip && \
     rm -rf terraform_0.13.5_linux_amd64.zip && \
