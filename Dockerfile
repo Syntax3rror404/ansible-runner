@@ -4,6 +4,8 @@ MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 ADD ./requirements.txt /tmp/requirements.txt
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 
+ARG CRYPTOGRAPHY_DONT_BUILD_RUST=1
+
 RUN echo "===> Installing GIT..."  && \
     apk add git && \
     echo "===> Installing ssh-client..."  && \
