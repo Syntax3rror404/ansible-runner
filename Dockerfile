@@ -34,7 +34,7 @@ ENV PATH="/opt/venv/bin:$PATH" VIRTUAL_ENV="/opt/venv"
 RUN pip3 install --upgrade pip
 RUN pip3 install ansible-tower-cli
 RUN pip3 install ansible-base
-RUN pip3 install -r /tmp/requirements.txt && \
+RUN pip3 install -r /tmp/requirements.txt
 
 # Final image
 FROM alpine:${ALPINE_VERSION}
