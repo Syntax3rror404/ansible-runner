@@ -65,7 +65,7 @@ RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 
 EXPOSE 22
-CMD ["/usr/bin/sudo", "/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]
+CMD ["/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]
 
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/terraform:/opt/tf-felper/tfh/bin:/opt/venv/bin" VIRTUAL_ENV="/opt/venv"
 COPY --from=builder /opt /opt
