@@ -9,3 +9,4 @@ passlib
 jmespath
 ansible-tower-cli
 packaging
+hvac
