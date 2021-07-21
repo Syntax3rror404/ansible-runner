@@ -32,8 +32,6 @@ ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH" VIRTUAL_ENV="/opt/venv"
 RUN pip3 install --upgrade pip
-RUN pip3 install ansible-tower-cli
-RUN pip3 install ansible-base
 RUN pip3 install -r /tmp/requirements.txt
 
 # Final image
