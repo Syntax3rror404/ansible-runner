@@ -1,15 +1,11 @@
 #pip3
-ansible==2.9.10
+ansible==4.3.0
 pyvmomi
 netaddr
 paramiko
 testinfra
 pytest-xdist
 passlib
-gitlab
-python-gitlab
 jmespath
 ansible-tower-cli
 packaging
-msrestazure
-ansible[azure]
