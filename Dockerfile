@@ -1,5 +1,5 @@
 # Final image
-FROM alpine:${ALPINE_VERSION}
+FROM alpine:latest
 MAINTAINER Marcel Zapf <zapfmarcel@live.de>
 RUN apk --update --no-cache add \
         unzip \
