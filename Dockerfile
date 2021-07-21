@@ -51,6 +51,8 @@ RUN echo "===> Adding hosts for convenience..."  && \
     openssh \
     git 
 
+RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     passwd -d root && \
     mkdir /root/.ssh && \
