@@ -41,11 +41,14 @@ RUN echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts && \
-    echo "===> Installing GIT..."  && \
-    apk add git && \
-    echo "===> Installing ssh-client..."  && \
-    apk add openssh-client && \
-    apk add openssh-keygen
+    echo "===> Install APK packages..."  && \
+    apk update && \
+    apk add --no-cache \
+    openssh-client \
+    openssh-keygen \
+    openssh \
+    git 
+
 
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 
