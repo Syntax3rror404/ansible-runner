@@ -1,6 +1,7 @@
 #pip3
 ansible==4.3.0
 pyvmomi
+pyyaml
 netaddr
 paramiko
 testinfra
