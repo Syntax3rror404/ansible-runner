@@ -41,7 +41,6 @@ RUN apk add --no-cache python3 libffi curl jq
 RUN echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost ansible_python_interpreter=/usr/bin/python3" >> /etc/ansible/hosts && \
     echo '127.0.0.1 localhost' >> /etc/hosts && \
     echo "===> Install APK packages..."  && \
     apk update && \
