@@ -41,7 +41,7 @@ RUN apk add --no-cache python3 libffi curl jq
 RUN echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost" >> /etc/ansible/hosts && \
+    echo "localhost ansible_python_interpreter=/usr/bin/python3" >> /etc/ansible/hosts && \
     echo '127.0.0.1 localhost' >> /etc/hosts && \
     echo "===> Install APK packages..."  && \
     apk update && \
@@ -51,6 +51,11 @@ RUN echo "===> Adding hosts for convenience..."  && \
     openssh \
     git 
 
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
+    passwd -d root && \
+    mkdir /root/.ssh && \
+    cp /etc/ssh/ssh_host_rsa_key  /root/.ssh/id_rsa && \
+    cp /etc/ssh/ssh_host_rsa_key.pub /root/.ssh/authorized_keys
 
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 
