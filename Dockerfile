@@ -27,7 +27,10 @@ RUN git clone -b ${TFHELPER_VERSION} https://github.com/hashicorp-community/tf-h
 
 # Install Python requirements
 ADD ./requirements.txt /tmp/requirements.txt
+WORKDIR /opt/venv
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH" VIRTUAL_ENV="/opt/venv"
 RUN pip3 install --upgrade pip
 RUN pip3 install -r /tmp/requirements.txt
 
@@ -68,4 +71,4 @@ CMD ["/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]
 
 ENV PYTHONPATH "${PYTHONPATH}:/opt/venv/bin/python"
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/terraform:/opt/tf-felper/tfh/bin:/opt/venv/bin" VIRTUAL_ENV="/opt/venv"
-COPY --from=builder /opt/venv /usr/local
+COPY --from=builder /opt /opt
