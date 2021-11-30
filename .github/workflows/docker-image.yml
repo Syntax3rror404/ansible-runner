@@ -9,5 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Login to docker
+      run: docker login -u ${{secrets.CI_REGISTRY_USER}} -p ${{secrets.CI_REGISTRY_PASSWORD}}
+      
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build -t Dockerfile -t my-image-name:stable .
+
+
