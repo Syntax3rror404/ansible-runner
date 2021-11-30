@@ -36,7 +36,7 @@ RUN pip3 install -r /tmp/requirements.txt
 
 # Final image
 FROM alpine:${ALPINE_VERSION}
-MAINTAINER Marcel Zapf <zapfmarcel@live.de>
+MAINTAINER Syntax3rror404
 RUN apk add --no-cache python3 libffi curl jq
 RUN echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
