@@ -20,4 +20,4 @@ jobs:
       run: docker build -t mzapf/ansible-runner:stable .
 
     - name: Push the Docker image
-      run: docker push mzapf/ansible-runner:stable
+      run: docker push -f mzapf/ansible-runner:stable
