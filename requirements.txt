@@ -1,5 +1,5 @@
 #pip3
-ansible==4.3.0
+ansible
 pyvmomi
 pyyaml
 netaddr
