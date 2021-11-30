@@ -15,9 +15,10 @@ jobs:
       with:
         username: ${{secrets.CI_REGISTRY_USER}}
         password: ${{secrets.CI_REGISTRY_PASSWORD}}
-      
-    - name: Build the Docker image
-      run: docker build -t mzapf/ansible-runner:stable .
 
-    - name: Push the Docker image
-      run: docker push -f mzapf/ansible-runner:stable
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: mzapf/ansible-runner:stable
