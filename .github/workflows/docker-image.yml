@@ -9,11 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Login to docker
-      run: docker login -u "${{secrets.CI_REGISTRY_USER}}" -p "${{secrets.CI_REGISTRY_PASSWORD}}"
+      
+    - name: Docker Login
+      uses: docker/login-action@v1.10.0
+      with:
+        username: ${{secrets.CI_REGISTRY_USER}}
+        password: ${{secrets.CI_REGISTRY_PASSWORD}}
       
     - name: Build the Docker image
       run: docker build -t Dockerfile -t my-image-name:stable .
 
-
+    - name: Build the Docker image
+      run: docker push mzapf/ansible-runner:stable
