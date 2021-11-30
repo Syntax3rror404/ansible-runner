@@ -18,7 +18,7 @@ jobs:
         registry: ghcr.io
         
     - name: Build the Docker image
-      run: docker build -t ghcr.io/Syntax3rror404/ansible-runner:latest .
+      run: docker build -t ghcr.io/mzapf/ansible-runner:latest .
 
     - name: Push the Docker image
-      run: docker push ghcr.io/Syntax3rror404/ansible-runner:latest
+      run: docker push ghcr.io/mzapf/ansible-runner:latest
