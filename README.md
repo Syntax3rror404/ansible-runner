@@ -1,7 +1,7 @@
 # ansible-runner
 Ansible, terraform, SSH runner for pipline tasks
 
-# How to use
+## How to use
 
 For running as dev environment:
 ```
@@ -18,7 +18,7 @@ jobs:
       image: ghcr.io/syntax3rror404/ansible-runner
 ```
 
-# Example update docker-compose nginx config
+## Example update docker-compose nginx config
 
 ```
 on:
