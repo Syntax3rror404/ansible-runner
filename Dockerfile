@@ -15,7 +15,7 @@ RUN apk --update --no-cache add \
         openssl-dev
 
 # Install Terraform CLI
-ARG TERRAFORM_VERSION=1.0.2
+ARG TERRAFORM_VERSION=1.1.0
 WORKDIR /opt/terraform
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o file.zip && \
     unzip file.zip && rm file.zip
