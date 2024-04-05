@@ -2,6 +2,7 @@ ARG ALPINE_VERSION=latest
 FROM alpine:${ALPINE_VERSION} AS builder
 
 RUN apk --update --no-cache add \
+        xorriso \
         unzip \
         git \
         python3 \
@@ -12,8 +13,7 @@ RUN apk --update --no-cache add \
         curl \
         musl-dev \
         libffi-dev \
-        openssl-dev \
-        cdrkit
+        openssl-dev
 
 # Install Terraform CLI
 ARG TERRAFORM_VERSION=1.7.5
