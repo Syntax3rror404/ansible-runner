@@ -13,7 +13,7 @@ RUN apk --update --no-cache add \
         musl-dev \
         libffi-dev \
         openssl-dev \
-        xorriso
+        cdrkit
 
 # Install Terraform CLI
 ARG TERRAFORM_VERSION=1.7.5
