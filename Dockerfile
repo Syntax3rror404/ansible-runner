@@ -15,9 +15,15 @@ RUN apk --update --no-cache add \
         openssl-dev
 
 # Install Terraform CLI
-ARG TERRAFORM_VERSION=1.1.0
+ARG TERRAFORM_VERSION=1.7.5
 WORKDIR /opt/terraform
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o file.zip && \
+    unzip file.zip && rm file.zip
+
+# Install Packer
+ARG PACKER_VERSION=1.10.2
+WORKDIR /opt/terraform
+RUN curl https://releases.hashicorp.com/packer/${TERRAFORM_VERSION}/packer_${TERRAFORM_VERSION}_linux_amd64.zip -o file.zip && \
     unzip file.zip && rm file.zip
 
 # Install TFE_helper
