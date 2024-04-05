@@ -5,7 +5,7 @@ Ansible, terraform, SSH runner for pipline tasks
 
 For running as dev environment:
 ```
-docker pull ghcr.io/syntax3rror404/ansible-runner:latest
+docker pull ghcr.io/syntax3rror404/ansible-runner:master
 ```
 
 For running in github actions:
