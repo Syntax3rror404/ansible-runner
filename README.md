@@ -1,5 +1,5 @@
 # ansible-runner
-Ansible, terraform, SSH runner for pipline tasks
+Ansible, terraform, packer, SSH runner for pipline tasks
 
 ## How to use
 
