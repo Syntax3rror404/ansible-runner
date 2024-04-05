@@ -12,7 +12,8 @@ RUN apk --update --no-cache add \
         curl \
         musl-dev \
         libffi-dev \
-        openssl-dev
+        openssl-dev \
+        mkisofs
 
 # Install Terraform CLI
 ARG TERRAFORM_VERSION=1.7.5
