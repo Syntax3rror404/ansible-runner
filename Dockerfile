@@ -43,7 +43,7 @@ RUN pip3 install -r /tmp/requirements.txt
 # Final image
 FROM alpine:${ALPINE_VERSION}
 MAINTAINER Syntax3rror404
-RUN apk add --no-cache python3 libffi curl jq xorriso
+RUN apk add --no-cache python3 libffi curl jq xorriso sshpass
 RUN echo "===> Adding hosts for convenience..."  && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
