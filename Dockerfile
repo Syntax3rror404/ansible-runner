@@ -23,7 +23,7 @@ RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 # Install Packer
 ARG PACKER_VERSION=1.10.2
 WORKDIR /opt/terraform
-RUN curl https://releases.hashicorp.com/packer/${TERRAFORM_VERSION}/packer_${TERRAFORM_VERSION}_linux_amd64.zip -o file.zip && \
+RUN curl https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip -o file.zip && \
     unzip file.zip && rm file.zip
 
 # Install TFE_helper
