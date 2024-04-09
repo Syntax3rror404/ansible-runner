@@ -1,5 +1,5 @@
 # ansible-runner
-Ansible, terraform, packer, SSH runner for pipline tasks
+Ansible, terraform, packer, SSH runner for pipline tasks like tekton or just simple sh scripts
 
 ## How to use
 
@@ -16,6 +16,43 @@ jobs:
     runs-on: self-hosted
     container: 
       image: ghcr.io/syntax3rror404/ansible-runner
+```
+
+For running in tekton:
+
+```
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-packer-vmtemplate
+  namespace: tekton-build
+spec:
+  params:
+  - name: PACKER_TEMPLATE_NAME
+  - name: PACKER_PATH
+  - name: git-subdirectory
+    type: string
+    default: ""
+    description: The subdirectory to list
+  workspaces:
+  - name: source
+    description: A workspace holding packer template files
+  steps:
+  - name: show-packer-version
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65532
+    image: ghcr.io/syntax3rror404/ansible-runner:master
+    script: |
+      packer --version
+  - name: show-ansible-version
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65532
+    image: ghcr.io/syntax3rror404/ansible-runner:master
+    script: |
+      ansible --version
 ```
 
 ## Example update docker-compose nginx config
