@@ -67,7 +67,7 @@ RUN chown -R appuser:appgroup /opt && \
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod 755 /tmp/entrypoint.sh && chown appuser:appgroup /tmp/entrypoint.sh
 
-USER USER 65532
+USER 65532
 
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 EXPOSE 22
