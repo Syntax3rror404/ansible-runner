@@ -1,6 +1,7 @@
 ARG ALPINE_VERSION=latest
 FROM alpine:${ALPINE_VERSION} AS builder
 
+# Install app dependencies
 RUN apk --update --no-cache add \
         unzip \
         git \
@@ -37,44 +38,40 @@ WORKDIR /opt/venv
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH" VIRTUAL_ENV="/opt/venv"
-RUN pip3 install --upgrade pip
-RUN pip3 install -r /tmp/requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r /tmp/requirements.txt
 
 # Final image
 FROM alpine:${ALPINE_VERSION}
-MAINTAINER Syntax3rror404
-RUN apk add --no-cache python3 libffi curl jq xorriso sshpass
-RUN echo "===> Adding hosts for convenience..."  && \
-    mkdir -p /etc/ansible /ansible && \
-    echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost ansible_python_interpreter=/opt/venv/bin/python ansible_connection=local">> /etc/ansible/hosts && \
-    echo "[localhost]" >> /etc/ansible/hosts && \
-    echo "localhost ansible_python_interpreter=/opt/venv/bin/python ansible_connection=local">> /etc/ansible/hosts && \
-    echo '127.0.0.1 localhost' >> /etc/hosts && \
-    echo "===> Install APK packages..."  && \
-    apk update && \
-    apk add --no-cache \
-    openssh-client \
-    openssh-keygen \
-    openssh \
-    git 
+LABEL maintainer="Syntax3rror404"
 
-RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+# Install runtime dependencies
+RUN apk add --no-cache python3 libffi curl jq xorriso sshpass \
+    openssh-client openssh-keygen openssh git && \
+    ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
-    passwd -d root && \
-    mkdir /root/.ssh && \
-    cp /etc/ssh/ssh_host_rsa_key  /root/.ssh/id_rsa && \
-    cp /etc/ssh/ssh_host_rsa_key.pub /root/.ssh/authorized_keys
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Copy from builder
+COPY --from=builder /opt /opt
+
+# Adjust permissions to allow the non-root user access
+RUN chown -R appuser:appgroup /opt && \
+    mkdir /home/appuser/.ssh && \
+    cp /etc/ssh/ssh_host_rsa_key /home/appuser/.ssh/id_rsa && \
+    cp /etc/ssh/ssh_host_rsa_key.pub /home/appuser/.ssh/authorized_keys && \
+    chown -R appuser:appgroup /home/appuser/.ssh
 
 ADD ./entrypoint.sh /tmp/entrypoint.sh
+RUN chmod 755 /tmp/entrypoint.sh && chown appuser:appgroup /tmp/entrypoint.sh
 
-RUN chmod 777 /tmp/entrypoint.sh
+USER appuser
+
 ENTRYPOINT ["/tmp/entrypoint.sh"]
-
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]
 
 ENV PYTHONPATH "${PYTHONPATH}:/opt/venv/bin/python"
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/terraform:/opt/tf-felper/tfh/bin:/opt/venv/bin" VIRTUAL_ENV="/opt/venv"
-COPY --from=builder /opt /opt
+
