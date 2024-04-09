@@ -50,8 +50,9 @@ RUN apk add --no-cache python3 libffi curl jq xorriso sshpass \
     openssh-client openssh-keygen openssh git && \
     ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 
-# Create non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# Create non-root user with specific UID/GID
+RUN addgroup -g 65532 appgroup && \
+    adduser -u 65532 -S appuser -G appgroup -h /home/appuser
 
 # Copy from builder
 COPY --from=builder /opt /opt
@@ -66,7 +67,7 @@ RUN chown -R appuser:appgroup /opt && \
 ADD ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod 755 /tmp/entrypoint.sh && chown appuser:appgroup /tmp/entrypoint.sh
 
-USER appuser
+USER USER 65532
 
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 EXPOSE 22
@@ -74,4 +75,3 @@ CMD ["/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]
 
 ENV PYTHONPATH "${PYTHONPATH}:/opt/venv/bin/python"
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/terraform:/opt/tf-felper/tfh/bin:/opt/venv/bin" VIRTUAL_ENV="/opt/venv"
-
