@@ -22,7 +22,7 @@ RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
     unzip file.zip && rm file.zip
 
 # Install Packer
-ARG PACKER_VERSION=1.10.2
+ARG PACKER_VERSION=1.10.3
 WORKDIR /opt/terraform
 RUN curl https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip -o file.zip && \
     unzip file.zip && rm file.zip
