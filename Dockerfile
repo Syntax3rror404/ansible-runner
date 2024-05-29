@@ -41,6 +41,11 @@ ENV PATH="/opt/venv/bin:$PATH" VIRTUAL_ENV="/opt/venv"
 RUN pip3 install --upgrade pip && \
     pip3 install -r /tmp/requirements.txt
 
+# Install MinIO Client
+WORKDIR /usr/local/bin
+RUN curl -O https://dl.min.io/client/mc/release/linux-amd64/mc && \
+    chmod +x mc
+
 # Final image
 FROM alpine:${ALPINE_VERSION}
 LABEL maintainer="Syntax3rror404"
@@ -56,6 +61,7 @@ RUN addgroup -g 65532 appgroup && \
 
 # Copy from builder
 COPY --from=builder /opt /opt
+COPY --from=builder /usr/local/bin/mc /usr/local/bin/mc
 
 # Adjust permissions to allow the non-root user access
 RUN chown -R appuser:appgroup /opt && \
