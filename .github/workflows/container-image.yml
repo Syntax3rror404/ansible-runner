@@ -16,6 +16,6 @@ jobs:
       - name: Kaniko build
         uses: aevea/action-kaniko@master
         with:
-          image: aevea/kaniko
+          image: ghcr.io/syntax3rror404/ansible-runner:main
           username: ${{ github.actor }}
           password: ${{secrets.CI_REGISTRY_PASSWORD}}
