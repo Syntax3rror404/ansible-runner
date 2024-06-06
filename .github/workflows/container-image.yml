@@ -9,13 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: docker/metadata-action@v4
-        id: metadata
-        with:
-          images: ghcr.io/${{ github.repository }}
       - name: Kaniko build
         uses: aevea/action-kaniko@master
         with:
-          image: ghcr.io/syntax3rror404/ansible-runner:main
+          image: ghcr.io/${{ github.repository }}
+          tag: ${{ github.head_ref || github.ref_name }}
           username: ${{ github.actor }}
           password: ${{secrets.CI_REGISTRY_PASSWORD}}
