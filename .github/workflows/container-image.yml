@@ -12,8 +12,7 @@ jobs:
       - name: Kaniko build
         uses: aevea/action-kaniko@master
         with:
-          #image: ${{ github.repository }}
-          image: ansible-runner
+          image: ${{ github.repository }}
           registry: ghcr.io
           tag: ${{ github.head_ref || github.ref_name }}
           username: ${{ github.actor }}
