@@ -14,6 +14,7 @@ jobs:
         with:
           #image: ${{ github.repository }}
           image: ansible-runner
+          registry: ghcr.io
           tag: ${{ github.head_ref || github.ref_name }}
           username: ${{ github.actor }}
           password: ${{secrets.CI_REGISTRY_PASSWORD}}
