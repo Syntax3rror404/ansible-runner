@@ -12,7 +12,7 @@ jobs:
       - name: Kaniko build
         uses: aevea/action-kaniko@master
         with:
-          image: ghcr.io/${{ github.repository }}
+          image: ${{ github.repository }}
           tag: ${{ github.head_ref || github.ref_name }}
           username: ${{ github.actor }}
           password: ${{secrets.CI_REGISTRY_PASSWORD}}
