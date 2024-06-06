@@ -5,7 +5,7 @@ Ansible, terraform, packer, SSH runner for pipline tasks like tekton or just sim
 
 For running as dev environment:
 ```
-docker pull ghcr.io/syntax3rror404/ansible-runner:master
+docker pull ghcr.io/syntax3rror404/ansible-runner:main
 ```
 
 For running in github actions:
@@ -43,14 +43,14 @@ spec:
     securityContext:
       runAsNonRoot: true
       runAsUser: 65532
-    image: ghcr.io/syntax3rror404/ansible-runner:master
+    image: ghcr.io/syntax3rror404/ansible-runner:main
     script: |
       packer --version
   - name: show-ansible-version
     securityContext:
       runAsNonRoot: true
       runAsUser: 65532
-    image: ghcr.io/syntax3rror404/ansible-runner:master
+    image: ghcr.io/syntax3rror404/ansible-runner:main
     script: |
       ansible --version
 ```
@@ -60,9 +60,9 @@ spec:
 ```
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   
 jobs:
   deploy-nginx-config:
@@ -86,7 +86,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
       - name: Update nginx config
-        run: ssh -i ~/.ssh/id_rsa user@dockersrv1.labza "sudo sh -c 'cd /root/dockersrv01/volumes/nginx/nginx_conf && git pull origin master && exit'"
+        run: ssh -i ~/.ssh/id_rsa user@dockersrv1.labza "sudo sh -c 'cd /root/dockersrv01/volumes/nginx/nginx_conf && git pull origin main && exit'"
 
       - name: Redeploy nginx to apply config
         run: ssh -i ~/.ssh/id_rsa user@dockersrv1.labza "sudo sh -c 'cd /root/dockersrv01 && docker-compose -f ./compose/NGINX_PROXY/docker-compose.yml down && docker-compose -f ./compose/NGINX_PROXY/docker-compose.yml up -d && exit'"
