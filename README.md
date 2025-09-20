@@ -5,7 +5,7 @@ Ansible, terraform, packer, SSH runner for pipline tasks like tekton or just sim
 
 For running as dev environment:
 ```
-docker pull ghcr.io/syntax3rror404/ansible-runner:main
+docker pull ghcr.io/syntax3rror404/ansible-runner@sha256:f778b582aebcab9b0bb5cca349b825c8498d75b68d9d93e547976a4737b78bb0
 ```
 
 For running in github actions:
@@ -15,7 +15,7 @@ jobs:
   deploy-nginx-config:
     runs-on: self-hosted
     container: 
-      image: ghcr.io/syntax3rror404/ansible-runner
+      image: ghcr.io/syntax3rror404/ansible-runner@sha256:f778b582aebcab9b0bb5cca349b825c8498d75b68d9d93e547976a4737b78bb0
 ```
 
 For running in tekton:
@@ -43,14 +43,14 @@ spec:
     securityContext:
       runAsNonRoot: true
       runAsUser: 65532
-    image: ghcr.io/syntax3rror404/ansible-runner:main
+    image: ghcr.io/syntax3rror404/ansible-runner@sha256:f778b582aebcab9b0bb5cca349b825c8498d75b68d9d93e547976a4737b78bb0
     script: |
       packer --version
   - name: show-ansible-version
     securityContext:
       runAsNonRoot: true
       runAsUser: 65532
-    image: ghcr.io/syntax3rror404/ansible-runner:main
+    image: ghcr.io/syntax3rror404/ansible-runner@sha256:f778b582aebcab9b0bb5cca349b825c8498d75b68d9d93e547976a4737b78bb0
     script: |
       ansible --version
 ```
