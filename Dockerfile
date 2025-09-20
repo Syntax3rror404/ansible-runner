@@ -1,11 +1,15 @@
+# Variables
 ARG ALPINE_VERSION=latest
-
-FROM alpine:${ALPINE_VERSION} AS builder
-
-# Build stage vars
 ARG TERRAFORM_VERSION=1.13.3
 ARG PACKER_VERSION=1.14.2
 ARG TFHELPER_VERSION=release
+
+FROM alpine:${ALPINE_VERSION} AS builder
+
+# Copy vars from global to building stage
+ARG TERRAFORM_VERSION
+ARG PACKER_VERSION
+ARG TFHELPER_VERSION
 
 # Install app dependencies
 RUN apk --update --no-cache add \
